@@ -1,10 +1,12 @@
 import MainCompoments from "../components/indexpages/Main"
 import CamCompoments from "../components/indexpages/CampusEnvMonitor"
 import HomeCompents from "../components/indexpages/Home"
+
 @Entry
 @Component
 struct Index {
   @State message: string = 'Main Pages'
+
 
   build() {
     Column() {

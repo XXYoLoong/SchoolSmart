@@ -2,12 +2,13 @@ import router from '@ohos.router'
 
 @Component
 struct FeatureItem {
-  @Prop label: string = ""  // 使用 @Prop 以便正确传递数据
+  @Prop label: string = ""
   @Prop route: string = ""
+  @Prop png: Resource
 
   build() {
     Column() {
-      Image($r('app.media.app_icon'))
+      Image(this.png)
         .width("80%")
         .height("50%")
         .objectFit(ImageFit.Contain)
@@ -78,10 +79,10 @@ export default struct Main {
       })
 
       Flex({ wrap: FlexWrap.Wrap, justifyContent: FlexAlign.Center }) {
-        FeatureItem({ label: "功能1", route: "pages/shfw" })
-        FeatureItem({ label: "功能2", route: "" })
-        FeatureItem({ label: "功能3", route: "" })
-        FeatureItem({ label: "功能4", route: "" })
+        FeatureItem({ label: "课程表", route: "pages/Timetable", png: $r('app.media.main_kcb') })
+        FeatureItem({ label: "校园导航", route: "pages/Navigation", png: $r('app.media.main_dh') })
+        FeatureItem({ label: "图书馆", route: "pages/Library", png: $r('app.media.main_tsg') })
+        FeatureItem({ label: "公告·活动", route: "pages/Notifications", png: $r('app.media.main_gg') })
       }
       .width("90%")
       .height("10%")

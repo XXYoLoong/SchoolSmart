@@ -15,6 +15,7 @@ export default struct UserProfile {
   @State courseSchedule: string = "OpenHarmony软硬协同 | 18:40 - 20:10 | 12-706"
   @State campusCardBalance: string = "余额: ¥58.30"
 
+
   build() {
     Column() {
       Column() {
@@ -107,7 +108,7 @@ export default struct UserProfile {
 
       // 个人信息
         Row() {
-          Image($r('app.media.app_icon'))
+          Image($r('app.media.email'))
             .width(24)
             .height(24)
             .margin({ right: 10 })
@@ -124,7 +125,7 @@ export default struct UserProfile {
         .shadow(3)
 
       Row() {
-          Image($r('app.media.app_icon'))
+          Image($r('app.media.phone'))
             .width(24)
             .height(24)
             .margin({ right: 10 })
