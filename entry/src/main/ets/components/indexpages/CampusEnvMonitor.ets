@@ -167,7 +167,7 @@ export default struct CampusEnvMonitor {
     }
     .width("100%")    // 主容器宽度占满屏幕
     .height("100%")   // 主容器高度占满屏幕
-    .backgroundColor("#F0F8FF") // 设置背景色
+    .backgroundColor("#ffffffff") // 设置背景色
     .padding(15)      // 主容器内边距
   }
 
