@@ -1,6 +1,20 @@
 {
   "app": {
-    "signingConfigs": [],
+    "signingConfigs": [
+      {
+        "name": "default",
+        "type": "HarmonyOS",
+        "material": {
+          "certpath": "C:\\Users\\Ni\\.ohos\\config\\default_SchoolSmart_L1Qydbm5dzPPI2oVC_m2_hLD-l0gS5beNEmbywpX6vQ=.cer",
+          "storePassword": "0000001BBBB052A6AE2BE57E227FFC8E5B2DA2A36D11A7265AF7D9848D760C6F33A65E048AE72C6AD4B970",
+          "keyAlias": "debugKey",
+          "keyPassword": "0000001BD3F98EFDE338115FB72173D61DA87273C8368A8355B25EA55DE8CE59425A61D3893391DFD80A1D",
+          "profile": "C:\\Users\\Ni\\.ohos\\config\\default_SchoolSmart_L1Qydbm5dzPPI2oVC_m2_hLD-l0gS5beNEmbywpX6vQ=.p7b",
+          "signAlg": "SHA256withECDSA",
+          "storeFile": "C:\\Users\\Ni\\.ohos\\config\\default_SchoolSmart_L1Qydbm5dzPPI2oVC_m2_hLD-l0gS5beNEmbywpX6vQ=.p12"
+        }
+      }
+    ],
     "products": [
       {
         "name": "default",
