@@ -26,8 +26,8 @@ import HomeCompents from "../components/indexpages/Home"
 @Entry
 @Component
 struct Index {
-  // 定义一个状态变量 message，初始化为 'Main Pages'
-  @State message: string = 'Main Pages'
+  // 定义一个状态变量 message，初始化为 'Index Pages'
+  @State message: string = 'Index Pages'
 
   // build 方法用于构建当前组件的UI布局
   build() {

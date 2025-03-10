@@ -56,9 +56,9 @@ export default struct LibraryPage {
           .onClick(() => { router.back() })
 
         // 页面标题，显示“图书馆管理系统”
-        Text("📚 图书馆管理系统")
+        Text("  📚 图书馆管理系统")
           .width("100%")
-          .textAlign(TextAlign.Center)
+          .textAlign(TextAlign.Start)
           .fontSize("24fp")
           .fontWeight(FontWeight.Bold)
           .margin({bottom:10})
@@ -67,10 +67,10 @@ export default struct LibraryPage {
       // 搜索栏区域，用户可通过该区域搜索图书
       Row() {
         // 搜索组件，默认显示提示文本
-        Search({ value:"🔍 搜索书籍..." })
+        TextInput({ placeholder:"请输入您要搜索的书籍名称" })
           .width("70%")
-        // 可通过 onChange 事件捕获输入变化，目前已注释掉
-        // .onChange((value: string) => { this.searchQuery = value.trim() })
+        //可通过 onChange 事件捕获输入变化，目前已注释掉
+        .onChange((value: string) => { this.searchQuery = value.trim() })
 
         // 搜索按钮，点击后可触发搜索操作（目前仅输出日志，已注释掉 onClick 事件）
         Button("搜索")
@@ -82,73 +82,77 @@ export default struct LibraryPage {
       .margin({bottom:15}) // 搜索栏与下方内容间距
 
       // 书籍列表区域，动态展示图书信息
-      Column() {
-        // 使用 ForEach 循环遍历图书数组，根据搜索查询过滤图书
-        ForEach(this.book.filter(book => this.searchQuery === "" || book.title.includes(this.searchQuery)), (book: books) => {
-          // 每本图书的信息展示在一个独立的卡片中
+
+        Scroll() {
           Column() {
-            // 第一行：展示图书标题、作者和状态信息
-            Row() {
-              // 图书标题
-              Text(book.title)
-                .fontSize("20fp")
-                .fontWeight(FontWeight.Bold)
-                .fontColor("#2C3E50")
-                .width("50%")
+          // 使用 ForEach 循环遍历图书数组，根据搜索查询过滤图书
+          ForEach(this.book.filter(book => this.searchQuery === "" || book.title.includes(this.searchQuery)),
+            (book: books) => {
+              // 每本图书的信息展示在一个独立的卡片中
+              Column() {
+                // 第一行：展示图书标题、作者和状态信息
+                Row() {
+                  // 图书标题
+                  Text(book.title)
+                    .fontSize("20fp")
+                    .fontWeight(FontWeight.Bold)
+                    .fontColor("#2C3E50")
+                    .width("50%")
 
-              // 作者信息，前置图标用于提示
-              Text(`📝 ${book.author}`)
-                .fontSize("16fp")
-                .fontColor("#34495E")
-                .width("30%")
+                  // 作者信息，前置图标用于提示
+                  Text(`📝 ${book.author}`)
+                    .fontSize("16fp")
+                    .fontColor("#34495E")
+                    .width("30%")
 
-              // 图书状态，根据状态不同设置不同的字体颜色
-              Text(`📖 ${book.status}`)
-                .fontSize("16fp")
-                .fontColor(
-                  book.status === "可借阅" ? "#27AE60" :
-                    book.status === "可预约" ? "#F39C12" : "#C0392B"
-                )
-                .width("20%")
-            }
-            .margin({bottom:5}) // 第一行与第二行之间的间距
+                  // 图书状态，根据状态不同设置不同的字体颜色
+                  Text(`📖 ${book.status}`)
+                    .fontSize("16fp")
+                    .fontColor(
+                      book.status === "可借阅" ? "#27AE60" :
+                        book.status === "可预约" ? "#F39C12" : "#C0392B"
+                    )
+                    .width("20%")
+                }
+                .margin({ bottom: 5 }) // 第一行与第二行之间的间距
 
-            // 第二行：根据图书状态显示相应的操作按钮以及推荐标识
-            Row() {
-              // 如果图书状态为“可借阅”，显示借阅按钮
-              if (book.status === "可借阅") {
-                Button("📥 借阅")
-                  .width("30%")
-                  .backgroundColor("#2ECC71")
-                  .fontColor("#FFFFFF")
-                  .onClick(() => console.info("借阅: " + book.title))
+                // 第二行：根据图书状态显示相应的操作按钮以及推荐标识
+                Row() {
+                  // 如果图书状态为“可借阅”，显示借阅按钮
+                  if (book.status === "可借阅") {
+                    Button("📥 借阅")
+                      .width("30%")
+                      .backgroundColor("#2ECC71")
+                      .fontColor("#FFFFFF")
+                      .onClick(() => console.info("借阅: " + book.title))
+                  }
+                  // 如果图书状态为“可预约”，显示预约按钮
+                  else if (book.status === "可预约") {
+                    Button("📌 预约")
+                      .width("30%")
+                      .backgroundColor("#F1C40F")
+                      .fontColor("#FFFFFF")
+                      .onClick(() => console.info("预约: " + book.title))
+                  }
+
+                  // 如果图书为推荐书籍，显示“推荐”标识
+                  if (book.isRecommended) {
+                    Text("⭐ 推荐")
+                      .fontSize("16fp")
+                      .fontWeight(FontWeight.Bold)
+                      .fontColor("#E67E22")
+                      .margin({ left: 10 })
+                  }
+                }
               }
-              // 如果图书状态为“可预约”，显示预约按钮
-              else if (book.status === "可预约") {
-                Button("📌 预约")
-                  .width("30%")
-                  .backgroundColor("#F1C40F")
-                  .fontColor("#FFFFFF")
-                  .onClick(() => console.info("预约: " + book.title))
-              }
-
-              // 如果图书为推荐书籍，显示“推荐”标识
-              if (book.isRecommended) {
-                Text("⭐ 推荐")
-                  .fontSize("16fp")
-                  .fontWeight(FontWeight.Bold)
-                  .fontColor("#E67E22")
-                  .margin({left:10})
-              }
-            }
-          }
-          .width("100%")                // 卡片宽度占满父容器
-          .backgroundColor("#ECF0F1")    // 卡片背景色为浅灰色
-          .borderRadius(10)             // 卡片边角圆润
-          .shadow(3)                    // 添加阴影效果，提升视觉层次感
-          .padding(10)                  // 内边距，确保内容不贴边
-          .margin({bottom:10})         // 卡片之间的垂直间距
-        })
+              .width("100%") // 卡片宽度占满父容器
+              .backgroundColor("#ECF0F1") // 卡片背景色为浅灰色
+              .borderRadius(10) // 卡片边角圆润
+              .shadow(3) // 添加阴影效果，提升视觉层次感
+              .padding(10) // 内边距，确保内容不贴边
+              .margin({ bottom: 10 }) // 卡片之间的垂直间距
+            })
+        }
       }
     }
     .width("100%")        // 页面宽度占满屏幕
