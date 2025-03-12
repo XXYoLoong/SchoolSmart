@@ -85,7 +85,4 @@ struct Index {
   }
 }
 
-// 定义一个函数 Main，当前未实现具体功能，抛出错误提示
-function Main() {
-  throw new Error('Function not implemented.')
-}
+
