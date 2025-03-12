@@ -1,6 +1,7 @@
 {
   "src": [
     "pages/Index",
+    "pages/OldIndex",
     "pages/Timetable",
     "pages/Library",
     "pages/Notifications",
