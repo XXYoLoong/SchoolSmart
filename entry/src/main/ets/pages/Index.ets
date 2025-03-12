@@ -10,9 +10,9 @@ struct LoginPage {
 
   login() {
     // 模拟身份验证 (实际应用应使用后端 API 进行验证)
-    if (this.username === 'student' && this.password === '123456') {
+    if (this.username === 's' && this.password === 'q') {
       this.userType = 'student';
-    } else if (this.username === 'teacher' && this.password === 'admin123') {
+    } else if (this.username === 't' && this.password === 'q') {
       this.userType = 'teacher';
     } else {
       prompt.showToast({ message: '用户名或密码错误' });
@@ -21,18 +21,25 @@ struct LoginPage {
 
     // 根据角色跳转至相应主页
     if (this.userType === 'student') {
-      router.pushUrl({ url: '/OldIndex' });
+      router.pushUrl({ url: 'pages/OldIndex' });
     } else {
-      router.pushUrl({ url: '/teacherHome' });
+      router.pushUrl({ url: 'pages/teacherHome' });
     }
   }
 
   build() {
-    Column({ space: 20 }) {
+    Column() {
+      Text('Sahool Smart+')
+        .fontSize(24)
+        .fontWeight(FontWeight.Bold)
+        .padding(10)
+
       Text('智慧校园系统')
         .fontSize(24)
         .fontWeight(FontWeight.Bold)
-        .padding(20)
+       .padding(20)
+
+
 
       TextInput({ placeholder: '请输入用户名', text: this.username })
         .onChange((value) => this.username = value)
@@ -40,6 +47,7 @@ struct LoginPage {
         .height(50)
         .margin({ top: 10 })
         .borderRadius(8)
+
 
       TextInput({ placeholder: '请输入密码', text: this.password })
         .type(InputType.Password)
@@ -49,6 +57,7 @@ struct LoginPage {
         .margin({ top: 10 })
         .borderRadius(8)
 
+
       Button('登录')
         .onClick(() => this.login())
         .width('80%')
@@ -56,7 +65,9 @@ struct LoginPage {
         .backgroundColor('#007DFF')
         .borderRadius(8)
         .fontColor('#FFFFFF')
-        .margin({ top: 10 });
+        .margin(50)
+
+
     }
     .alignItems(HorizontalAlign.Center)
     .justifyContent(FlexAlign.Center)
